@@ -16,6 +16,12 @@ namespace WebApp20252709
             // Add services to the container.
             builder.Services.AddScoped<CalculationService>();
 
+            builder.Services.Configure<RabbitMqOptions>(builder.Configuration.GetSection("RabbitMq"));
+            builder.Services.AddSingleton<RabbitMqInitializer>();
+            builder.Services.AddSingleton<IRabbitMqProducer, RabbitMqProducer>();
+            builder.Services.AddSingleton<IRabbitMqConsumer, RabbitMqConsumer>();
+            builder.Services.AddHostedService<RabbitMqHostedService>();
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", policy =>
@@ -49,6 +55,9 @@ namespace WebApp20252709
             {
                 var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
                 db.Database.MigrateAsync();
+
+                var initializer = scope.ServiceProvider.GetRequiredService<RabbitMqInitializer>();
+                initializer.InitializeAsync().GetAwaiter().GetResult();
             }
 
             // Configure the HTTP request pipeline.

@@ -35,7 +35,7 @@ namespace WebApp20252709.Controllers
                 PreviousValue = response.PreviousValue
             };
 
-            //await _rabbitMqProducer.Publish(CalculationTask.QueueName, task);
+            await _rabbitMqProducer.Publish(CalculationTask.QueueName, task);
 
             return Ok(response);
         }
