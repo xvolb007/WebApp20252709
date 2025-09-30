@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.DTOs
 {
     public class CalculationRequest
     {
+        [Required(ErrorMessage = "Input is required")]
+        [PositiveDecimal]
+        public decimal Input { get; set; }
     }
 }

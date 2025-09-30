@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Domain.DTOs
 {
     public class CalculationResponse
     {
+        public decimal ComputedValue { get; set; }
+        public decimal InputValue { get; set; }
+        public decimal PreviousValue { get; set; }
     }
 }

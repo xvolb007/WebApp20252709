@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace Infrastructure.Storage
+namespace Domain.Storage
 {
     public class GlobalStorage
     {
